@@ -16,6 +16,7 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+    await ConnectDB();
     const formData = await request.formData();
     const timestamp = Date.now();
 
