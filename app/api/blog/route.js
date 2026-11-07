@@ -3,18 +3,17 @@ import { NextResponse } from "next/server";
 import {writeFile} from "fs/promises";
 import BlogModel from "@/lib/models/BlogModels";
 
-export async function GET(request) {
-    const LoadDB = async () =>{
+const LoadDB = async () =>{
         await ConnectDB();
     }
-
     LoadDB();
+    //API endpoint for fetching blogs
+export async function GET(request) {
+    const blogs = await BlogModel.find({});
 
-    return NextResponse.json({ 
-        message: "GET request received" 
-    });
+    return NextResponse.json({ blogs});
 }
-
+//API endpoint for uploading blocks
 export async function POST(request) {
     await ConnectDB();
     const formData = await request.formData();
