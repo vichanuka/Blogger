@@ -49,7 +49,7 @@ const Page = () => {
           title: '',
           description: '',
           category: 'Startup',
-          author: 'Unknown',
+          author: 'Chanuka Dilshan',
           authorImg: '/author_img.png',
         });
 
