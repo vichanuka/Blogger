@@ -52,7 +52,7 @@ const Page = () => {
           author: 'Unknown',
           authorImg: '/author_img.png',
         });
-        
+
       } else {
         toast.error(response.data.message);
       }
@@ -78,8 +78,8 @@ const Page = () => {
       <p className='text-xl mt-4'>Blog Category</p>
       <select  name="category" onChange={onChangeHandler} value={data.category} className='w-40 mt-4 px-4 py3 border text-gray-500'>
         <option value="Startup">Startup</option>
-        <option value="technology">Technology</option>
-        <option value="lifestyle">Lifestyle</option>
+        <option value="Technology">Technology</option>
+        <option value="Lifestyle">Lifestyle</option>
       </select>
       <br></br>
     

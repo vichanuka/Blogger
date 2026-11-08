@@ -9,6 +9,19 @@ const LoadDB = async () =>{
     LoadDB();
     //API endpoint for fetching blogs
 export async function GET(request) {
+    await ConnectDB();
+    const blogId = request.nextUrl.searchParams.get('id');
+    if (blogId) {
+        try {
+            const blog = await BlogModel.findById(blogId);
+            if (!blog) {
+                return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+            }
+            return NextResponse.json(blog);
+        } catch (error) {
+            return NextResponse.json({ error: "Invalid blog ID" }, { status: 400 });
+        }
+    }
     const blogs = await BlogModel.find({});
 
     return NextResponse.json({ blogs});
