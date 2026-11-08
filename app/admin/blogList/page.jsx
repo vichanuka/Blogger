@@ -2,13 +2,26 @@
 import React, { useState, useEffect } from 'react'
 import BlogTableItem from '@/Components/AdminComponents/BlogTableItem'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const page = () => {
+const Page = () => {
   const [blogs, setBlogs] = useState([])
 
   const fetchBlogs = async () => {
     const response = await axios.get('/api/blog')
     setBlogs(response.data.blogs)
+  }
+  const deleteBlog = async (mongoId) => {
+    try {
+      const response = await axios.delete('/api/blog', {
+        params: { id: mongoId },
+      })
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Failed to delete blog')
+    } finally {
+      await fetchBlogs()
+    }
   }
 
   useEffect(() => {
@@ -38,7 +51,7 @@ const page = () => {
           </thead>
           <tbody>
             {blogs.map((item, index) => (
-              <BlogTableItem key={index} mongoId={item._id} title={item.title} author={item.author} authorImg={item.authorImg} date={item.date} />
+              <BlogTableItem key={item._id} mongoId={item._id} title={item.title} author={item.author} authorImg={item.authorImg} date={item.date} deleteBlog={deleteBlog}/>
             ))}
           </tbody>
         </table>
@@ -47,4 +60,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
