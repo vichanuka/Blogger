@@ -42,23 +42,10 @@ return(data?<>
   </div>
   <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
       {data.image && <Image src={data.image} alt="" width={1280} height={720} className="border-4 border-white"/>}
+      <div className="blog-content" dangerouslySetInnerHTML={{__html:data.description}}></div>
       <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>
       <p className="font-medium">{data.description}</p>
-      {/*<h3 className="my-5 text-[18px] font-semibold">Step 1: Self-Reflection and Goal Setting</h3>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
 
-       <h3 className="my-5 text-[18px] font-semibold">Step 2: Self-Reflection and Goal Setting</h3>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-
-       <h3 className="my-5 text-[18px] font-semibold">Step 3: Self-Reflection and Goal Setting</h3>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-
-       <h3 className="my-5 text-[18px] font-semibold">Conclusion</h3>
-      <p className="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum, asperiores, quaerat repellat aspernatur maxime veritatis quidem soluta est assumenda omnis sapiente inventore ipsum obcaecati velit consectetur similique iure laborum.</p>
-      */}
       <div className="my-24">
         <p className="text-black font-semibold my-4">Share this article on social media</p>
         <div className="flex gap-3">
