@@ -43,8 +43,7 @@ return(data?<>
   <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
       {data.image && <Image src={data.image} alt="" width={1280} height={720} className="border-4 border-white"/>}
       <div className="blog-content" dangerouslySetInnerHTML={{__html:data.description}}></div>
-      <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>
-      <p className="font-medium">{data.description}</p>
+      
 
       <div className="my-24">
         <p className="text-black font-semibold my-4">Share this article on social media</p>
