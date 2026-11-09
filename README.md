@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blogger
 
-## Getting Started
+A modern blog application built with Next.js and MongoDB. It includes a public blog listing, individual blog detail pages, and an admin area for adding and deleting posts.
 
-First, run the development server:
+## Features
+
+- Responsive blog homepage with featured blog cards
+- Single post pages for reading full articles
+- Admin dashboard for creating blog entries
+- Blog image upload support
+- MongoDB-backed content storage
+- Tailwind-based styling
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- MongoDB with Mongoose
+- Tailwind CSS
+- Axios for client-side API calls
+
+## Prerequisites
+
+- Node.js 18+
+- npm
+- MongoDB instance running locally or remotely
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env.local` file in the project root and add your MongoDB connection string:
+
+```env
+MONGODB_URI=mongodb://127.0.0.1:27017/blogger
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+blogger/
+├── app/
+│   ├── admin/
+│   ├── api/
+│   ├── blogs/
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+├── Components/
+├── lib/
+├── public/
+├── .env.local
+├── package.json
+├── README.md
+└── next.config.mjs
+```
 
-## Learn More
+## Main Routes
 
-To learn more about Next.js, take a look at the following resources:
+- `/` — homepage listing all blog posts
+- `/blogs/[id]` — detailed blog page
+- `/admin/addProduct` — create a new blog post
+- `/admin/blogList` — manage existing blog posts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app exposes blog endpoints under `app/api/blog/route.js`:
 
-## Deploy on Vercel
+- `GET /api/blog` — fetch all blogs
+- `GET /api/blog?id=<id>` — fetch a single blog
+- `POST /api/blog` — create a blog post with uploaded image
+- `DELETE /api/blog?id=<id>` — delete a blog post
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
+
+## Notes
+
+- Uploaded blog images are stored in the `public` directory.
+- The database connection is configured in `lib/config/db.js`.
+- Blog data schema is defined in `lib/models/BlogModels.js`.
+
+## License
+
+This project is for educational/demo purposes.
