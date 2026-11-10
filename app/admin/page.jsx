@@ -1,9 +1,5 @@
-import React from 'react'
+import { redirect } from 'next/navigation';
 
-const page = () => {
-  return (
-    <div></div>
-  )
+export default function AdminPage() {
+  redirect('/admin/addProduct');
 }
-
-export default page

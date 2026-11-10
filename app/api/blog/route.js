@@ -3,28 +3,42 @@ import { NextResponse } from "next/server";
 import { unlink, writeFile } from "fs/promises";
 import path from "path";
 import BlogModel from "@/lib/models/BlogModels";
+import { verifyAdminSession, unauthorizedResponse } from "@/lib/auth/guard";
 
 // API endpoint for fetching blogs
 export async function GET(request) {
-    await ConnectDB();
-    const blogId = request.nextUrl.searchParams.get('id');
-    if (blogId) {
-        try {
-            const blog = await BlogModel.findById(blogId);
-            if (!blog) {
-                return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    try {
+        await ConnectDB();
+        const blogId = request.nextUrl.searchParams.get('id');
+        if (blogId) {
+            try {
+                const blog = await BlogModel.findById(blogId);
+                if (!blog) {
+                    return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+                }
+                return NextResponse.json(blog);
+            } catch (error) {
+                return NextResponse.json({ error: "Invalid blog ID" }, { status: 400 });
             }
-            return NextResponse.json(blog);
-        } catch (error) {
-            return NextResponse.json({ error: "Invalid blog ID" }, { status: 400 });
         }
-    }
-    const blogs = await BlogModel.find({});
+        const blogs = await BlogModel.find({});
 
-    return NextResponse.json({ blogs});
+        return NextResponse.json({ blogs });
+    } catch (error) {
+        console.error("GET /api/blog error:", error.message);
+        return NextResponse.json(
+            { error: "Database connection failed", details: error.message },
+            { status: 500 }
+        );
+    }
 }
 // API endpoint for uploading blogs
 export async function POST(request) {
+    const admin = await verifyAdminSession(request);
+    if (!admin) {
+        return unauthorizedResponse("Admin authentication required to create blogs");
+    }
+
     await ConnectDB();
     const formData = await request.formData();
     const timestamp = Date.now();
@@ -57,6 +71,11 @@ export async function POST(request) {
 // api endpoint for deleting blogs
 
 export async function DELETE(request) {
+    const admin = await verifyAdminSession(request);
+    if (!admin) {
+        return unauthorizedResponse("Admin authentication required to delete blogs");
+    }
+
     await ConnectDB();
     const id = request.nextUrl.searchParams.get('id');
 
